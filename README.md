@@ -1,2 +1,2 @@
 Diagrama de classe:
-<img width="3300" height="2550" alt="Sistema de Banco" src="https://github.com/user-attachments/assets/f6e63efb-f5c4-45a4-a232-29902508ad6b" />
+<img width="3299" height="2549" alt="Sistema de Banco" src="https://github.com/user-attachments/assets/1b58a6ae-0fcf-43b9-bb77-7f278ed323bc" />
