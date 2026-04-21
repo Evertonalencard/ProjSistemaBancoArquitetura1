@@ -12,7 +12,7 @@ class PagamentoTranferencia: EstrategiaPagamento{
     
     private let taxaTransferencias: Decimal = 0.01
     
-    func pagar(valor: Decimal, de origem: ContaCorrente, para destino: Conta) -> Resultado {
+    func pagar(valor: Decimal, de origem: ProtocoloContaCorrente, para destino: ProtocoloContaCorrente) -> Resultado {
         let taxa = taxaTransferencias * valor
         let total = valor + taxa
         
@@ -21,7 +21,7 @@ class PagamentoTranferencia: EstrategiaPagamento{
         switch resultadoSaque {
         case .sucesso:
             _ = destino.depositar(valor: valor)
-            return .sucesso(novoValor: origem.saldoAtual())
+            return .sucesso(novoValor: origem.saldo)
         case .falha(let erro):
             return .falha(erro: erro)
         }

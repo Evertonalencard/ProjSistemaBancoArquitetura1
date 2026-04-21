@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CardService {
+final class CardService {
     private var possuiCartao: Bool
     private var limiteCredito: Decimal
     
@@ -16,27 +16,19 @@ class CardService {
         self.limiteCredito = 0.0
     }
     
-    public func solicitarCartao() -> String{
-        if !possuiCartao{
-            possuiCartao = true
-            return "Parabéns, seu cartão chega em 30 dias"
-        }else{
-            return"Você já possui um cartão"
-        }
+    func solicitarCartao(numero: String, cvv: String, validade: String, titular: String) -> Cartao {
+        let cartao = Cartao(numero: numero, cvv: cvv, validade: validade, titular: titular, limite: 0)
+        return cartao
     }
     
-    public func solicitarAumentoDeCredito(para conta:ContaCorrente) -> String{
-        if conta.salarioAtual > conta.salarioAnterior && possuiCartao == true{
-            let limiteAnterior = limiteCredito
-            let diferencaSalario = conta.salarioAtual - conta.salarioAnterior
-            limiteCredito += diferencaSalario
-            
-            
-            
-            
-            return "Parabéns, seu limite aumentou de R$ \(limiteAnterior) para R$ \(limiteCredito)."
-        } else {
-            return "Você não é elegível para aumento de limite no momento."
+    func solicitarAumentoDeCredito(cartao: Cartao, para conta: ProtocoloContaCorrente) -> String {
+            if conta.salarioAtual > conta.salarioAnterior && cartao.ativo {
+                let diferenca = conta.salarioAtual - conta.salarioAnterior
+                let limiteAnterior = cartao.limite
+                cartao.limite += diferenca
+                return "Limite aumentou de R$ \(limiteAnterior) para R$ \(cartao.limite)."
+            } else {
+                return "Você não é elegível para aumento de limite no momento."
+            }
         }
-    }
 }

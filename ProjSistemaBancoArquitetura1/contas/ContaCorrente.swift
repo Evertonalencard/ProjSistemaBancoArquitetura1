@@ -7,62 +7,77 @@
 
 import Foundation
 
-class ContaCorrente: Conta{
+class ContaCorrente: ProtocoloContaCorrente {
+    
+    var negativado: Bool{
+        return saldo < 0
+    }
+    public private(set) var nome: String
+    public private(set) var saldo: Decimal{
+        willSet{
+            
+        }
+        didSet{
+            if negativado == true {
+                print("ATENCAO: Sua conta está negativada!")
+            }
+        }
+    }
     public private(set) var salarioAtual: Decimal
     public private(set) var salarioAnterior: Decimal
     
-    
-    let emprestimoService = EmprestimoService()
-    let cardService = CardService()
-    
-    public override init(nome: String) {
-        salarioAtual = 0.0
-        salarioAnterior = 0.0
-        super.init(nome: nome)
-    }
-    
-    func solicitarCartao() -> String {
-        return cardService.solicitarCartao()
-    }
-    
-    func solicitarAumentoDeCredito() -> String {
-        return cardService.solicitarAumentoDeCredito(para: self)
-    }
-    
-    func solicitarEmprestimo(valor: Decimal) -> Resultado {
-        return emprestimoService.solicitarEmprestimo(valor: valor, para: self)
-    }
-    
-    
-    public func registraNovoSalario(valor: Decimal) -> Decimal {
+    public func registraNovoSalario(valor: Decimal) -> Resultado {
         self.salarioAnterior = self.salarioAtual
         self.salarioAtual = valor
         print("Seu novo salario é de: \(valor)")
-        return valor
+        return .sucesso(novoValor: salarioAtual)
     }
     
+    public func depositar(valor: Decimal) -> Resultado {
+        guard valor > 0 else {
+            return .falha(erro: "Valor de depósito inválido. Deve ser maior que zero.")
+        }
+        
+        saldo += valor
+        print("Depósito de R$ \(valor) realizado. Novo saldo: R$ \(saldo)")
+        return .sucesso(novoValor: saldo)
+    }
     
+    public func sacar(valor: Decimal) -> Resultado {
+        guard valor > 0 else {
+            return .falha(erro: "Valor de saque inválido. Deve ser maior que zero.")
+        }
+        
+        if saldo >= valor {
+            saldo -= valor
+            print("Saque de R$ \(valor) realizado. Novo saldo: R$ \(saldo)")
+            return .sucesso(novoValor: saldo)
+        } else {
+            
+            return .falha(erro: "Tentativa de saque de R$ \(valor) falhou. Saldo insuficiente.")
+        }
+    }
     
+    public func verificarDadosCadastrais()->String{
+        return "Seus dados são, nome: \(nome)..."
+    }
+    
+    public func saldoAtual()->Resultado{
+        print("Seu saldo é de: \(saldo)")
+        
+        return .sucesso(novoValor: saldo)
+    }
+    
+    public init(nome: String) {
+        self.nome = nome
+        saldo = 0.0
+        self.salarioAtual = 0
+        self.salarioAnterior = 0
+        
+    }
     
 }
 
 // MARK: - extensao
 
-extension ContaCorrente: ContaComSalario{
-    
-    public func pagamento(valor: Decimal, para contaDestino: Conta, usando estrategia: EstrategiaPagamento) -> Resultado {
-        
-        print("\nIniciando pagamento de R$ \(valor)")
-        let resultado = estrategia.pagar(valor: valor, de: self, para: contaDestino)
-        
-        switch resultado {
-        case .sucesso(let novoSaldo):
-            print("Pagamento concluído. Saldo final: \(novoSaldo)")
-        case .falha(let erro):
-            print("Pagamento não pôde ser concluído. Motivo: \(erro)")
-        }
-        
-        return resultado
-    }
-    
-}
+

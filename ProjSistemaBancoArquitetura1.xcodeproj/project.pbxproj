@@ -19,7 +19,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		162401BC2F4D07500018D6B6 /* ProjSistemaBancoArquitetura1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ProjSistemaBancoArquitetura1; sourceTree = BUILT_PRODUCTS_DIR; };
+		16003A172F4E8D4200541962 /* ProjSistemaBancoArquitetura1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ProjSistemaBancoArquitetura1; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -45,16 +45,8 @@
 			isa = PBXGroup;
 			children = (
 				162401BE2F4D07500018D6B6 /* ProjSistemaBancoArquitetura1 */,
-				162401BD2F4D07500018D6B6 /* Products */,
+				16003A172F4E8D4200541962 /* ProjSistemaBancoArquitetura1 */,
 			);
-			sourceTree = "<group>";
-		};
-		162401BD2F4D07500018D6B6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				162401BC2F4D07500018D6B6 /* ProjSistemaBancoArquitetura1 */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -79,7 +71,7 @@
 			packageProductDependencies = (
 			);
 			productName = ProjSistemaBancoArquitetura1;
-			productReference = 162401BC2F4D07500018D6B6 /* ProjSistemaBancoArquitetura1 */;
+			productReference = 16003A172F4E8D4200541962 /* ProjSistemaBancoArquitetura1 */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -90,7 +82,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2620;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					162401BB2F4D07500018D6B6 = {
 						CreatedOnToolsVersion = 26.2;
@@ -107,7 +99,7 @@
 			mainGroup = 162401B32F4D07500018D6B6;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 162401BD2F4D07500018D6B6 /* Products */;
+			productRefGroup = 162401B32F4D07500018D6B6;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -161,6 +153,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = KN699D335R;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -186,6 +179,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -225,6 +219,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = KN699D335R;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -243,6 +238,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
@@ -251,6 +247,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = KN699D335R;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -264,6 +261,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = KN699D335R;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
