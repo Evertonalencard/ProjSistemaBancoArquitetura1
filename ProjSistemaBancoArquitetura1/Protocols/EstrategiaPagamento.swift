@@ -7,6 +7,7 @@
 import Foundation
 
 protocol EstrategiaPagamento {
-    
-    func pagar(valor: Decimal, de origem: ProtocoloContaCorrente, para destino: ProtocoloContaCorrente) -> Resultado
+    func pagar(valor: Decimal,
+               de origem: ControllerContaCorrente,
+               para destino: ControllerContaCorrente) -> Resultado
 }

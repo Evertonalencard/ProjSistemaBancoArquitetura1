@@ -8,17 +8,15 @@
 import Foundation
 
 class PagEspecie: EstrategiaPagamento {
-    
-    
-    func pagar(valor: Decimal, de origem: ProtocoloContaCorrente, para destino: ProtocoloContaCorrente) -> Resultado {//alterar para controller
-        let resultadoSaque = origem.sacar(valor: valor)
-        
+    func pagar(valor: Decimal, de origem: ControllerContaCorrente, para destino: ControllerContaCorrente) -> Resultado {
+        let resultadoSaque = origem.controlaSacar(valor: valor)
         switch resultadoSaque {
         case .sucesso:
-            _ = destino.depositar(valor: valor)
-            return .sucesso(novoValor: origem.saldo)//alterar no futuro
+            _ = destino.controlaDepositar(valor: valor)
+            return origem.controlaSaldoAtual()
         case .falha(let erro):
             return .falha(erro: erro)
         }
     }
 }
+

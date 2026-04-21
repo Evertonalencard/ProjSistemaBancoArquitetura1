@@ -40,18 +40,9 @@ final class ContaPoupanca: ProtocoloConta{
     }
     
     public func sacar(valor: Decimal) -> Resultado {
-        guard valor > 0 else {
-            return .falha(erro: "Valor de saque inválido. Deve ser maior que zero.")
-        }
-        
-        if saldo >= valor {
-            saldo -= valor
-            print("Saque de R$ \(valor) realizado. Novo saldo: R$ \(saldo)")
-            return .sucesso(novoValor: saldo)
-        } else {
-            
-            return .falha(erro: "Tentativa de saque de R$ \(valor) falhou. Saldo insuficiente.")
-        }
+        saldo -= valor
+        print("Saque de R$ \(valor) realizado. Novo saldo: R$ \(saldo)")
+        return .sucesso(novoValor: saldo)
     }
     
     public func verificarDadosCadastrais()->String{

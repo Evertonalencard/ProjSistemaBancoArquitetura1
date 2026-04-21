@@ -59,21 +59,17 @@ final class ContaCorrenteInternacional: ProtocolContaCorrenteInternacional{
     }
     
     public func sacar(valor: Decimal) -> Resultado {
-        guard valor > 0 else {
-            return .falha(erro: "Valor de saque inválido. Deve ser maior que zero.")
-        }
+        
         let valorIOF = valor * taxaIOF
         let totalDebitado = valor + valorIOF
         
         print("Iniciando saque em Dólares (IOF de \(valorIOF) será aplicado)...")
         
-        if saldo >= totalDebitado {
-            saldo -= totalDebitado  // ← correto
-            return .sucesso(novoValor: saldo)
-        } else {
-            return .falha(erro: "Saldo insuficiente para saque com IOF.")
-        }
+        saldo -= totalDebitado  
+        return .sucesso(novoValor: saldo)
+        
     }
+    
     public func saldoAtual()->Resultado{
         print("saldo atual é\(saldo)usd")
         

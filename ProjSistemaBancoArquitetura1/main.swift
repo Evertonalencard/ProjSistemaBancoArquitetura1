@@ -6,27 +6,32 @@
 //
 
 import Foundation
+let pix = PagPix()
 
 let contaEverton = ContaCorrente(nome: "Éverton")
 let ContaEmily = ContaPoupanca(nome: "Emily")
+let contaYasmin = ContaCorrenteInternacional(nome: "Yasmin")
+let contaRonaldo = ContaCorrente(nome: "Ronaldo")
 let verificador = ContaTipoVerifier()
 let controllerEverton = ControllerContaCorrente(conta: contaEverton)
+let controllerYasmin = ControllerContaCorrente(conta: contaYasmin)
+let controllerRonaldo = ControllerContaCorrente(conta: contaRonaldo)
+let controllerPagYasmin = ControllerPagamento(controllerOrigem: controllerYasmin, estrategia: pix)
+let controllerPagEverton = ControllerPagamento(controllerOrigem: controllerEverton, estrategia: pix)
 
 //MARK: - everton
-print(contaEverton.registraNovoSalario(valor: 2000))
-print(contaEverton.sacar(valor: 100))
-print(contaEverton.depositar(valor: 500))
-print(contaEverton.sacar(valor: 100))
-print(contaEverton.verificarDadosCadastrais())
-print(contaEverton.saldoAtual())
-
-print(verificador.verificarTipoDeConta(contaEverton))
-print(verificador.verificarTipoDeConta(ContaEmily))
-
+print(controllerEverton.controlaRegistraNovoSalario(valor: 700))
+print(controllerEverton.controlaDepositar(valor: 1000))
+print(controllerEverton.controlaSacar(valor: 0))
+print("---------------------------------------------------------------------")
+print(controllerYasmin.controlaRegistraNovoSalario(valor: 700))
+print(controllerYasmin.controlaDepositar(valor: 1000))
+print(controllerYasmin.controlaSacar(valor: 100))
+print("---------------------------------------------------------------------")
 
 
-
-
+print(controllerPagYasmin.controlarPagamento(valor: 0, para: controllerEverton))
+print(controllerPagEverton.controlarPagamento(valor: 0, para: controllerRonaldo))
 
 
 //MARK: - emily

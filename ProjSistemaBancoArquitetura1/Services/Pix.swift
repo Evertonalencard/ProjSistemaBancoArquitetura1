@@ -8,16 +8,15 @@
 import Foundation
 
 class PagPix: EstrategiaPagamento {
-    
-    
-    func pagar(valor: Decimal, de origem: ProtocoloContaCorrente, para destino: ProtocoloContaCorrente) -> Resultado {
-        let resultadoSaque = origem.sacar(valor: valor)
+    func pagar(valor: Decimal, de origem: ControllerContaCorrente, para destino: ControllerContaCorrente) -> Resultado {
+        let resultadoSaque = origem.controlaSacar(valor: valor)  // ← passa pelo CoR agora
         switch resultadoSaque {
         case .sucesso:
-            _ = destino.depositar(valor: valor)
-            return .sucesso(novoValor: origem.saldo)
+            _ = destino.controlaDepositar(valor: valor)
+            return origem.controlaSaldoAtual()
         case .falha(let erro):
             return .falha(erro: erro)
         }
     }
 }
+
